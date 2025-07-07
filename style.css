@@ -1,0 +1,175 @@
+/* === BASE === */
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #003366, #004080);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-height: 100vh;
+  padding: 40px;
+  color: #000;
+}
+
+/* === ANIMACIÓN SUAVE AL CARGAR === */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.card-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  justify-content: center;
+  align-items: flex-start;
+  animation: fadeIn 1s ease-in;
+}
+
+/* === TARJETAS === */
+.dashboard-card {
+  background-color: #ffffff;
+  border: 1px solid #d0d0d0;
+  border-radius: 12px;
+  padding: 25px 30px;
+  text-align: center;
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  min-width: 280px;
+  position: relative;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+/* === TÍTULOS DE TARJETA === */
+.card-title {
+  font-size: 15px;
+  color: #003366;
+  font-weight: 600;
+  margin-bottom: 12px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+/* === VALOR CENTRAL === */
+.card-value {
+  font-size: 36px;
+  color: #111;
+  font-weight: bold;
+}
+
+/* === DIFERENTES ANCHOS === */
+.wide-card {
+  width: 700px;
+}
+
+.chart-card {
+  width: 300px;
+}
+
+/* === GRÁFICAS DE PASTEL === */
+.chart-container {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
+
+#feederChart {
+  position: relative;
+  z-index: 1;
+}
+
+.chart-center {
+  position: absolute;
+  top: 52%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 22px;
+  color: #003366;
+  font-weight: bold;
+  z-index: 2;
+  pointer-events: none;
+  text-shadow: 1px 1px 2px #fff;
+}
+
+/* === RESUMEN DE ENTRADAS Y RECARGAS === */
+.line-summary {
+  margin-top: 10px;
+  font-size: 16px;
+  text-align: left;
+}
+
+.line-summary strong {
+  color: #003366;
+}
+
+.line-summary span {
+  font-weight: bold;
+  color: #0077b6;
+}
+
+/* === SELECTOR DE ESTACIÓN === */
+#stationSelector {
+  margin-bottom: 20px;
+  padding: 6px 12px;
+  font-size: 14px;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  background-color: #fff;
+  color: #003366;
+}
+
+/* === TARJETA DE DISPOSITIVOS === */
+.device-card {
+  width: 350px;
+  text-align: left;
+}
+
+.device-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-top: 10px;
+}
+
+.device-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.device-name {
+  display: flex;
+  align-items: center;
+  width: 110px;
+  font-size: 14px;
+  gap: 5px;
+  color: #003366;
+}
+
+.device-bar-container {
+  flex: 1;
+  height: 12px;
+  background-color: #e1ecf4;
+  margin: 0 10px;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.device-bar {
+  height: 100%;
+  background-color: #00b4d8;
+  border-radius: 4px;
+  transition: width 0.4s ease-in-out;
+}
+
+.device-value {
+  width: 60px;
+  text-align: right;
+  font-weight: bold;
+  color: #003366;
+}
