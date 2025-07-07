@@ -36,7 +36,7 @@ CREATE TABLE Autobuses (
 INSERT INTO Estaciones (Estacion, Dia, TotalPasesEntrada, MontoPasesEntrada, TotalPasesSalida, MontoPasesSalida, TotalPasesGarita, MontoPasesGarita, TotalVentasVRT, MontoVentasVRT, TotalRecargasVRT, MontoRecargasVRT, IdPuntero)
 VALUES
 -- Tlaquepaque Centro
-('Tlaquepaque Centro', '2025-07-17', 400, 6000.00, 350, 5250.00, 50, 750.00, 20, 300.00, 150, 2250.00, 1),
+('Tlaquepaque Centro', '2025-06-11', 400, 6000.00, 350, 5250.00, 50, 750.00, 20, 300.00, 150, 2250.00, 1),
 ('Tlaquepaque Centro', '2025-07-18', 420, 6300.00, 360, 5400.00, 55, 825.00, 22, 330.00, 160, 2400.00, 1),
 ('Tlaquepaque Centro', '2025-07-19', 410, 6150.00, 355, 5325.00, 52, 780.00, 21, 315.00, 155, 2325.00, 1),
 ('Tlaquepaque Centro', '2025-07-20', 430, 6450.00, 370, 5550.00, 58, 870.00, 24, 360.00, 165, 2475.00, 1),
@@ -45,7 +45,7 @@ VALUES
 ('Tlaquepaque Centro', '2025-07-23', 425, 6375.00, 375, 5625.00, 57, 855.00, 24, 360.00, 165, 2475.00, 1),
 
 -- CUTLAQ
-('CUTLAQ', '2025-04-17', 300, 4500.00, 250, 3750.00, 40, 600.00, 18, 270.00, 100, 1500.00, 2),
+('CUTLAQ', '2025-05-17', 300, 4500.00, 250, 3750.00, 40, 600.00, 18, 270.00, 100, 1500.00, 2),
 ('CUTLAQ', '2025-04-18', 310, 4650.00, 255, 3825.00, 42, 630.00, 19, 285.00, 105, 1575.00, 2),
 ('CUTLAQ', '2025-04-19', 320, 4800.00, 260, 3900.00, 43, 645.00, 20, 300.00, 110, 1650.00, 2),
 ('CUTLAQ', '2025-04-20', 305, 4575.00, 250, 3750.00, 41, 615.00, 19, 285.00, 105, 1575.00, 2),
@@ -141,3 +141,6 @@ DELETE FROM Autobuses; -- borra todas las filas de Estaciones
 DBCC CHECKIDENT ('Autobuses', RESEED, 0); -- reinicia el contador IDENTITY a 1
 
 SELECT TOP 5 * FROM Autobuses;
+
+
+SELECT * FROM Estaciones

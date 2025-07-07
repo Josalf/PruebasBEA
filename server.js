@@ -19,33 +19,37 @@ const config = {
   requestTimeout: 15000
 };
 
-// === ENDPPOINTS PRINCIPALES ===
-
-// 1) Entradas + Recargas Global (por día)
+// === Entradas vs Recharges con FULL OUTER JOIN ===
 app.get('/api/entriesVsRecharges', async (req, res) => {
   try {
     const pool = await sql.connect(config);
-    const est = await pool.request().query(`
-      SELECT Dia, SUM(TotalPasesEntrada) AS Entries, SUM(TotalRecargasVRT) AS Recharges
-      FROM Estaciones GROUP BY Dia ORDER BY Dia
-    `);
-    const bus = await pool.request().query(`
-      SELECT Dia, SUM(TotalPasesMoneda) AS Entries, SUM(CantidadRecargas) AS Recharges
-      FROM Autobuses GROUP BY Dia ORDER BY Dia
+    const result = await pool.request().query(`
+      SELECT
+        COALESCE(e.Dia, b.Dia) AS Dia,
+        ISNULL(e.Entries, 0) + ISNULL(b.Entries, 0) AS TotalEntries,
+        ISNULL(e.Recharges, 0) + ISNULL(b.Recharges, 0) AS TotalRecharges
+      FROM
+        (SELECT Dia, SUM(TotalPasesEntrada) AS Entries, SUM(TotalRecargasVRT) AS Recharges
+         FROM Estaciones GROUP BY Dia) e
+      FULL OUTER JOIN
+        (SELECT Dia, SUM(TotalPasesMoneda) AS Entries, SUM(CantidadRecargas) AS Recharges
+         FROM Autobuses GROUP BY Dia) b
+      ON e.Dia = b.Dia
+      ORDER BY Dia
     `);
 
-    const dates = est.recordset.map(r => r.Dia);
-    const entriesTotal = est.recordset.map((r, i) => r.Entries + (bus.recordset[i]?.Entries || 0));
-    const rechargesTotal = est.recordset.map((r, i) => r.Recharges + (bus.recordset[i]?.Recharges || 0));
-
+    const dates = result.recordset.map(r => r.Dia);
+    const entriesTotal = result.recordset.map(r => r.TotalEntries);
+    const rechargesTotal = result.recordset.map(r => r.TotalRecharges);
     res.json({ dates, entriesTotal, rechargesTotal });
+
   } catch (err) {
     console.error(err);
     res.status(500).send('Error ENTRIES VS RECHARGES.');
   }
 });
 
-// 2) Cantidad Rutas Autobuses
+// === Cantidad Rutas Autobuses ===
 app.get('/api/feederBusRoutes', async (req, res) => {
   try {
     const pool = await sql.connect(config);
@@ -61,7 +65,7 @@ app.get('/api/feederBusRoutes', async (req, res) => {
   }
 });
 
-// 3) Transacciones por Tipo
+// === Transacciones por Tipo ===
 app.get('/api/transactionsByType', async (req, res) => {
   try {
     const pool = await sql.connect(config);
@@ -80,7 +84,7 @@ app.get('/api/transactionsByType', async (req, res) => {
   }
 });
 
-// 4) Selector Lista Estaciones
+// === Lista de Estaciones ===
 app.get('/api/listaEstaciones', async (req, res) => {
   try {
     const pool = await sql.connect(config);
@@ -92,7 +96,7 @@ app.get('/api/listaEstaciones', async (req, res) => {
   }
 });
 
-// 5) Histórico Entradas+Recargas por Estación
+// === Histórico Entradas + Recargas por Estación ===
 app.get('/api/entriesRecargasPerStation/:estacion', async (req, res) => {
   try {
     const pool = await sql.connect(config);
@@ -114,7 +118,7 @@ app.get('/api/entriesRecargasPerStation/:estacion', async (req, res) => {
   }
 });
 
-// 6) Device Transactions Total (NUEVO)
+// === Transacciones Dispositivos Total ===
 app.get('/api/deviceTransactionsTotal', async (req, res) => {
   try {
     const pool = await sql.connect(config);

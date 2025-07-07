@@ -2,7 +2,7 @@
 document.addEventListener("DOMContentLoaded", async () => {
   const API_URL = "http://localhost:3000";
 
-  // === NUEVO: Función para dar formato de fecha amigable ===
+  // === Formato de fecha bonito ===
   const formatDate = (isoDate) => {
     const d = new Date(isoDate);
     return d.toLocaleDateString('es-MX', {
@@ -19,7 +19,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   new Chart(ctxLine, {
     type: "line",
     data: {
-      labels: global.dates.map(formatDate), // <-- FORMATO LIMPIO
+      labels: global.dates.map(formatDate),
       datasets: [
         { label: "Stations+Buses Entries", data: global.entriesTotal, borderColor: "#0077b6", tension: 0.3 },
         { label: "Stations+Buses Recharges", data: global.rechargesTotal, borderColor: "#90e0ef", tension: 0.3 }
@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   async function loadStationHistory(estacion) {
     const res = await fetch(`${API_URL}/api/entriesRecargasPerStation/${estacion}`);
     const data = await res.json();
-    stationLineChart.data.labels = data.dates.map(formatDate); // <-- FORMATEA FECHAS
+    stationLineChart.data.labels = data.dates.map(formatDate);
     stationLineChart.data.datasets[0].data = data.entries;
     stationLineChart.data.datasets[1].data = data.recharges;
     stationLineChart.update();
