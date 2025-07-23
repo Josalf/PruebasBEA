@@ -1,56 +1,64 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Dashboard Prototipo</title>
-  <link rel="stylesheet" href="style.css" />
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Dashboard Prototipo</title>
+<link rel="stylesheet" href="style.css" />
+<link rel="icon" href="/favicon.ico" type="image/x-icon">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-  <div class="card-grid">
-    <!-- Primera fila (arriba) -->
-    <div class="dashboard-card wide-card">
-      <div class="card-title">Total Autobuses Transacciones</div>
-      <div class="card-value" id="transactionCount">Cargando...</div>
-    </div>
-
-    <div class="dashboard-card device-card">
-      <div class="card-title">Transacciones Dispositivos Total</div>
-      <div id="deviceList" class="device-list"></div>
-    </div>
-
-    <div class="dashboard-card chart-card">
-      <div class="card-title">Cantidad Ruta Autobuses</div>
-      <div class="chart-container">
-        <canvas id="feederChart" width="250" height="250"></canvas>
-        <div class="chart-center" id="feederTotal">0</div>
-      </div>
-    </div>
-
-    <!-- Segunda fila (abajo) -->
-    <div class="dashboard-card wide-card">
-      <div class="card-title">Transacciones por Tipo</div>
-      <canvas id="stackedBarChart" width="600" height="300"></canvas>
-    </div>
-
-    <div class="dashboard-card wide-card">
-      <div class="card-title">Entradas por estación</div>
-      <label for="stationSelector">Seleccionar estación</label>
-      <select id="stationSelector"></select>
-      <canvas id="stationLineChart" width="700" height="300"></canvas>
-    </div>
-
-    <div class="dashboard-card wide-card">
-      <div class="card-title">Entries vs Recharges</div>
-      <canvas id="lineChart" width="700" height="300"></canvas>
-      <div class="line-summary">
-        <p><strong>Estaciones + Entradas Autobuses:</strong> <span id="totalEntries">0</span></p>
-        <p><strong>Estaciones + Recargas Autobuses:</strong> <span id="totalRecharges">0</span></p>
-      </div>
-    </div>
+<div class="card-grid">
+ 
+    <!-- ENTRIES VS RECHARGES -->
+<div class="dashboard-card wide-card">
+<div class="card-title">ENTRIES VS. RECHARGES</div>
+<canvas id="lineChart" width="700" height="300"></canvas>
+<div class="line-summary">
+<p><strong>Estaciones + Entradas Autobuses:</strong> <span id="totalEntries">0</span></p>
+<p><strong>Estaciones + Recargas Autobuses:</strong> <span id="totalRecharges">0</span></p>
+</div>
+</div>
+ 
+    <!-- TOTAL STATION TRANSACTIONS -->
+<div class="dashboard-card">
+<div class="card-title">Total Autobuses Transacciones</div>
+<div class="card-value" id="transactionCount">Cargando...</div>
+</div>
+ 
+    <!-- FEEDER BUS ROUTES (PASTEL) -->
+<div class="dashboard-card chart-card">
+<div class="card-title">Cantidad Ruta Autobuses</div>
+<div class="chart-container">
+<canvas id="feederChart" width="250" height="250"></canvas>
+<div class="chart-center" id="feederTotal">0</div>
+</div>
+</div>
+ 
+    <!-- TRANSACTIONS BY TYPE -->
+<div class="dashboard-card wide-card">
+<div class="card-title">Transacciones por Tipo</div>
+<canvas id="stackedBarChart" width="600" height="300"></canvas>
+</div>
+ 
+    <!-- NUEVO: ENTRANCES + RECHARGES POR ESTACIÓN -->
+<div class="dashboard-card wide-card">
+<div class="card-title">Entradas por estación</div>
+<label for="stationSelector">Seleccionar estación</label>
+<select id="stationSelector"></select>
+<canvas id="stationLineChart" width="700" height="300"></canvas>
+</div>
+ 
+    <!-- DEVICE TRANSACTIONS -->
+<div class="dashboard-card device-card">
+<div class="card-title">Transacciones Dispositivos Total</div>
+<div id="deviceList" class="device-list"></div>
+</div>
+ 
   </div>
-
+ 
   <script src="script.js"></script>
 </body>
 </html>

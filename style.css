@@ -9,21 +9,16 @@ body {
   min-height: 100vh;
   padding: 40px;
   color: #000;
+  font-size: 16px;
 }
 
-/* === ANIMACIÓN SUAVE AL CARGAR === */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
+/* === CARD GRID === */
 .card-grid {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);  /* Tres columnas */
   gap: 30px;
-  justify-content: center;
-  align-items: flex-start;
-  animation: fadeIn 1s ease-in;
+  width: 100%;
+  margin-bottom: 30px;
 }
 
 /* === TARJETAS === */
@@ -46,7 +41,7 @@ body {
 
 /* === TÍTULOS DE TARJETA === */
 .card-title {
-  font-size: 15px;
+  font-size: 18px;  /* Aumento el tamaño del texto de los títulos */
   color: #003366;
   font-weight: 600;
   margin-bottom: 12px;
@@ -54,14 +49,15 @@ body {
   letter-spacing: 0.5px;
 }
 
-/* === VALOR CENTRAL === */
+/* === VALOR CENTRAL (Ajuste aquí para hacerlo más grande) === */
 .card-value {
-  font-size: 36px;
+  font-size: 48px;  /* Aumento el tamaño de la letra para el valor */
   color: #111;
   font-weight: bold;
+  margin-top: 20px;  /* Espaciado adicional si es necesario */
 }
 
-/* === DIFERENTES ANCHOS === */
+/* === DIFERENTES ANCHOS PARA TARJETAS === */
 .wide-card {
   width: 700px;
 }

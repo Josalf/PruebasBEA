@@ -2,6 +2,8 @@
 const express = require('express');
 const sql = require('mssql');
 const cors = require('cors');
+const cron = require('node-cron');
+const helmet = require('helmet');  // Importar helmet
 
 const app = express();
 app.use(cors());
@@ -18,6 +20,17 @@ const config = {
   connectionTimeout: 15000,
   requestTimeout: 15000
 };
+
+// Usar helmet para configurar las políticas de seguridad
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],  // Permitir cargar desde el mismo dominio
+      imgSrc: ["'self'", 'data:', 'http://localhost:3000'],  // Permitir imágenes del mismo dominio y desde localhost
+      scriptSrc: ["'self'"],  // Permitir cargar scripts del mismo dominio
+    }
+  }
+}));
 
 // === Entradas vs Recharges con FULL OUTER JOIN ===
 app.get('/api/entriesVsRecharges', async (req, res) => {
