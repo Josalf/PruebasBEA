@@ -13,6 +13,7 @@
     "cors": "^2.8.5",
     "express": "^5.1.0",
     "helmet": "^8.1.0",
+    "msnodesqlv8": "^5.1.1",
     "mssql": "^11.0.1",
     "mysql2": "^3.14.2",
     "node-cron": "^4.2.1"

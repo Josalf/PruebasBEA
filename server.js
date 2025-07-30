@@ -1,6 +1,5 @@
 // server.js
 const express = require('express');
-const sql = require('mssql');
 const cors = require('cors');
 const cron = require('node-cron');
 const helmet = require('helmet');  // Importar helmet
@@ -8,19 +7,36 @@ const helmet = require('helmet');  // Importar helmet
 const app = express();
 app.use(cors());
 
+const sql = require('mssql/msnodesqlv8');
+
+
+
+const config =
+{
+  "ENGINE": "mssql",
+  "NAME": "SistemasBEA",
+  "HOST": "localhost\MSSQLSERVER01",
+  "PORT": "",
+  "OPTIONS": {
+      "driver": "ODBC Driver 17 for SQL Server",
+      "extra_params": "DRIVER={ODBC Driver 17 for SQL Server};TRUSTED_CONNECTION=yes;",
+      "user": "sa",
+      "password": "bea12345",
+  }
+};
+/*
 const config = {
-  user: 'jcalvillo',
-  password: 'bea12345',
-  server: 'localhost',
+  server: 'localhost\MSSQLSERVER01',
   database: 'SistemasBEA',
+  driver: 'ODBC Driver 17 for SQL Server',
   options: {
-    encrypt: true,
-    trustServerCertificate: true
+    trustedConnection: true
   },
+
   connectionTimeout: 15000,
   requestTimeout: 15000
 };
-
+*/
 // Usar helmet para configurar las políticas de seguridad
 app.use(helmet({
   contentSecurityPolicy: {
